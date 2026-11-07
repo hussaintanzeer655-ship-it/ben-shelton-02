@@ -1,0 +1,1 @@
+// Script embedded in index_html for portability
