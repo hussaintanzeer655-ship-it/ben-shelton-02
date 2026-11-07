@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ben Shelton - Interactive Tabs</title>
+  <style>
+    :root{--bg:#0b0f14;--card:#141a20;--accent:#ffd166;--text:#f5f7fb}
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{font-family:Inter, system-ui, sans-serif;background:var(--bg);color:var(--text)}
+    header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(6,10,15,.98);z-index:10}
+    nav a{color:#e4e9f5;text-decoration:none;margin:0 8px;font-weight:600}
+    main{max-width:980px;margin:2rem auto;padding:0 1rem}
+    .tabs{display:flex;gap:6px;padding:0.5rem 0}
+    .tab{border:1px solid #2a324c;background:#1c2438;color:#d9e0f5;padding:.5rem 1rem;border-radius:999px;cursor:pointer}
+    .tab.active{background:var(--accent);color:#1a1a1a}
+    .panel{background:var(--card);border-radius:12px;padding:1rem;margin-top:1rem;min-height:220px}
+    footer{text-align:center;padding:1rem 0;color:#95a4b8}
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Ben Shelton</strong>
+    <nav><a href="#">Home</a><a href="#demo">Demo</a><a href="#contact">Contact</a></nav>
+  </header>
+  <main>
+    <section id="demo">
+      <div class="tabs" role="tablist" aria-label="Demo tabs">
+        <button class="tab active" data-i="0">Overview</button>
+        <button class="tab" data-i="1">Tips</button>
+        <button class="tab" data-i="2">Code</button>
+      </div>
+      <div class="panel" id="panel">A compact SPA with vanilla JS — switch tabs to see content.
+      </div>
+    </section>
+  </main>
+  <section id="contact" class="hero" style="padding-top:0"></section>
+  <footer>© Ben Shelton</footer>
+  <script>
+    const contents=[
+      'Overview: Simple, responsive, accessible tabs using plain HTML, CSS, and JS.',
+      'Tips: Use semantic buttons, manage focus, and keep content in the DOM for speed.',
+      'Code: Minimal JS to switch panels without page reloads, no dependencies.'
+    ];
+    const panel=document.getElementById('panel');
+    const tabs=document.querySelectorAll('.tab');
+    function show(i){panel.textContent=contents[i];tabs.forEach(t=>t.classList.toggle('active', t.dataset.i==i));}
+    tabs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.i)));
+    show(0);
+  </script>
+</body>
+</html>
